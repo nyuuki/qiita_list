@@ -1,12 +1,15 @@
 version: 2
 jobs:
   build:
-    docker:
+    docker: # ベースとなるDocker imageを指定
       - image: python:3
-
+    environment:
+        TZ: /usr/share/zoneinfo/Asia/Tokyo # Time Zoneを指定
+    working_directory: ~/work # コード実行場所 以下のstepsはworking_directoryで実行される
     steps:
       - checkout
       - run: mkdir htmlcov
+      - working_directory: /home/circleci/go/src/project # コード実行場所 以下のstepsはworking_directoryで実行される
 
       # requirements.txtに変更がなければ、以前作成したPython仮想環境を復元
       - restore_cache:
@@ -32,9 +35,8 @@ jobs:
           name: Run tests
           command: |
             . venv/bin/activate
-            python manage.py test stocks
+            python manage.py test
+
+      # テスト結果の成果物を保存するパス
       - store_artifacts:
-          path: htmlcov/
-          destination: tr1
-      - store_test_results:
           path: htmlcov/
