@@ -12,7 +12,7 @@ jobs:
       - run:
           name: analyze by SonarQube
           command: |
-              ls -la
+              ls -la .circleci/
               bash .circleci/analyze-sonarqube.sh
       - run: mkdir htmlcov # テストコード置き場
 
