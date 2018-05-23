@@ -9,7 +9,7 @@ jobs:
     working_directory: ~/work # コード実行場所 以下のstepsはworking_directoryで実行される
     steps:
       - checkout
-      - run: mkdir htmlcov
+      - run: mkdir htmlcov # テストコード置き場
       # requirements.txtに変更がなければ、以前作成したPython仮想環境を復元
       - restore_cache:
           keys:
