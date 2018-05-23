@@ -22,8 +22,11 @@ jobs:
          working_directory: ~/work
          command: |
             ls -R
+            pwd
             python3 -m venv venv
             . venv/bin/activate
+            ls -R
+            pwd
             pip install -r requirements.txt
 
       # Python仮想環境を保管
