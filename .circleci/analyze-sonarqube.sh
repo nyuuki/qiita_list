@@ -12,10 +12,10 @@ unzip -d $HOME $HOME/$SONAR_VERSION.zip
 DEFAULT_SONAR_PARAMS="-Dsonar.projectKey=$CIRCLE_PROJECT_REPONAME \
                         -Dsonar.login=$SONAR_TOKEN \
                         -Dsonar.projectName=$CIRCLE_PROJECT_REPONAME \
-                        -Dsonar.projectVersion=$CIRCLE_BUILD_NUM" \
+                        -Dsonar.projectVersion=$CIRCLE_BUILD_NUM \
                         -Dsonar.host.url=https://sonarcloud.io \
                         -Dsonar.sourceEncoding=UTF-8 \
-                        -Dsonar.sources=.
+                        -Dsonar.sources=."
 
 if [ -n "$CI_PULL_REQUEST" ]; then
   if [ "$CIRCLE_BRANCH" != "staging" ] & [ "$STAGING_EXISTS" ]; then
