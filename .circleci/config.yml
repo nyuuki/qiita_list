@@ -6,7 +6,7 @@ jobs:
       - image: python:3
     environment:
         TZ: /usr/share/zoneinfo/Asia/Tokyo # Time Zoneを指定
-    # working_directory: ~/work # コード実行場所 以下のstepsはworking_directoryで実行される
+    #working_directory: デフォルトが`~/project/`
     steps:
       - checkout
       - run: mkdir htmlcov # テストコード置き場
@@ -21,12 +21,8 @@ jobs:
          name: Install dependencies
          # working_directory: ~/work
          command: |
-            ls -R
-            pwd
             python3 -m venv venv
             . venv/bin/activate
-            ls -R
-            pwd
             pip install -r requirements.txt
 
       # Python仮想環境を保管
