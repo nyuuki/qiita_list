@@ -29,7 +29,9 @@ jobs:
 
       - run:
           name: Run tests
-          command: python manage.py test stocks
+          command: |
+            . venv/bin/activate
+            python manage.py test stocks
 
       - store_artifacts:
           path: test-reports
