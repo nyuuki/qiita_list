@@ -6,7 +6,7 @@ jobs:
 
     steps:
       - checkout
-      - run: mkdir test-reports
+      - run: mkdir htmlcov
 
       # requirements.txtに変更がなければ、以前作成したPython仮想環境を復元
       - restore_cache:
@@ -34,7 +34,7 @@ jobs:
             . venv/bin/activate
             python manage.py test stocks
       - store_artifacts:
-          path: test-reports/
+          path: htmlcov/
           destination: tr1
       - store_test_results:
-          path: test-reports/
+          path: htmlcov/
