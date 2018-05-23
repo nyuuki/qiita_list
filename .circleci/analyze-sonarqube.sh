@@ -16,9 +16,10 @@ SONAR_PARAMS="-Dsonar.projectKey=$CIRCLE_PROJECT_REPONAME \
             -Dsonar.organization=$SONAR_ORG \
             -Dsonar.sources=. \
             -Dsonar.github.oauth=$GITHUB_TOKEN \
-            -Dsonar.github.endpoint='https://api.github.com' \
+            -Dsonar.github.endpoint=https://api.github.com \
             -Dsonar.github.repository=$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME \
             -Dsonar.projectKey=$SONAR_PJKEY \
+            -Dsonar.log.level=WARN \
             -Dsonar.github.pullRequest=${PR_NUMBER} \
             -Dsonar.analysis.mode=preview "
 
