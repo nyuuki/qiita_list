@@ -20,4 +20,4 @@ SONAR_PARAMS="-Dsonar.projectKey=$CIRCLE_PROJECT_REPONAME \
             -Dsonar.projectKey=$SONAR_PJKEY \
             -Dsonar.analysis.mode=preview;"
 
-$HOME/$SONAR_DIR/bin/sonar-scanner $DEFAULT_SONAR_PARAMS
+$HOME/$SONAR_DIR/bin/sonar-scanner $SONAR_PARAMS
