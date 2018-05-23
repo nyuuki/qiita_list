@@ -28,8 +28,11 @@ jobs:
       - run:
          name: Install dependencies
          command: |
+            echo "hoge1"
             sudo python3 -m venv venv
+            echo "hoge2"
             . venv/bin/activate
+            echo "hoge3"
             sudo pip install -r requirements.txt
 
       # Python仮想環境を保管
