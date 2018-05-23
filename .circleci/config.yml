@@ -5,11 +5,10 @@ jobs:
       - image: python:3
     environment:
         TZ: /usr/share/zoneinfo/Asia/Tokyo # Time Zoneを指定
+    working_directory: ~/work # コード実行場所 以下のstepsはworking_directoryで実行される
     steps:
       - checkout
-      - working_directory: ~/work # コード実行場所 以下のstepsはworking_directoryで実行される
       - run: mkdir htmlcov
-
       # requirements.txtに変更がなければ、以前作成したPython仮想環境を復元
       - restore_cache:
           keys:
