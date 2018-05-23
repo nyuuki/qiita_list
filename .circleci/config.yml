@@ -13,12 +13,13 @@ jobs:
       # requirements.txtに変更がなければ、以前作成したPython仮想環境を復元
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "requirements.txt" }}
+          - v1-dependencies-{{ checksum "~/work/requirements.txt" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
       - run:
          name: Install dependencies
+         working_directory: ~/work
          command: |
             python3 -m venv venv
             . venv/bin/activate
@@ -27,8 +28,8 @@ jobs:
       # Python仮想環境を保管
       - save_cache:
           paths:
-            - ./venv
-          key: v1-dependencies-{{ checksum "requirements.txt" }}
+            - ~/work/venv
+          key: v1-dependencies-{{ checksum "~/work/requirements.txt" }}
 
       - run:
           name: Run tests
