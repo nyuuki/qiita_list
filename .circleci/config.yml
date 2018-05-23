@@ -12,3 +12,6 @@ jobs:
       - run:
           name: Run tests
           command: python manage.py test stocks
+      - run:
+          name: MV cover
+          command: mv cover $CIRCLE_ARTIFACTS
