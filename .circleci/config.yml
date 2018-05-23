@@ -29,11 +29,11 @@ jobs:
          name: Install dependencies
          command: |
             echo "hoge1"
-            sudo python3 -m venv venv
+            python3 -m venv venv
             echo "hoge2"
             source venv/bin/activate
             echo "hoge3"
-            sudo pip install -r requirements.txt
+            pip install -r requirements.txt
 
       # Python仮想環境を保管
       # pathsで設定した内容をkeyの名前で保存できる。
