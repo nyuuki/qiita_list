@@ -15,16 +15,15 @@ jobs:
               sudo apt update
               sudo apt install -y unzip
               bash .circleci/analyze-sonarqube.sh
-              chmod -R 777 ./
       - run: mkdir htmlcov # テストコード置き場
 
       # requirements.txtに変更がなければ、以前作成したPython仮想環境を復元
       # save_cacheで指定したkeyで保存したファイルをダウンロードできる。
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "requirements.txt" }}
-      #    # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
+#      - restore_cache:
+#          keys:
+#          - v1-dependencies-{{ checksum "requirements.txt" }}
+#      #    # fallback to using the latest cache if no exact match is found
+#          - v1-dependencies-
 
       - run:
          name: Install dependencies
@@ -32,7 +31,7 @@ jobs:
             python3 -m venv venv
             source venv/bin/activate
             pip install -r requirements.txt
-
+            sudo chmod -R 777 ./
       # Python仮想環境を保管
       # pathsで設定した内容をkeyの名前で保存できる。
       - save_cache:
