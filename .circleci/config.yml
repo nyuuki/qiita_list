@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build: Workflowを試しに使ってみるためにコメントアウト
+  build: # Workflowを試しに使ってみるためにコメントアウト
     # build_and_test: # workflowから呼び出し
     docker: # ベースとなるDocker imageを指定
       - image: "hancheng/circleci-python3.6-java8"
