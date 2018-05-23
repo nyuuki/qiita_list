@@ -144,6 +144,7 @@ TEST_APPS = (
 NOSE_ARGS = [
     '-s',
     '--with-coverage',
+    '--cover-html',
     '--cover-package=' + ",".join(TEST_APPS),
     '--cover-branches',
     '--cover-erase',
