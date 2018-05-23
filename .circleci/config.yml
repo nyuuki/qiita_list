@@ -11,4 +11,4 @@ jobs:
           command: pip install -r requirements.txt
       - run:
           name: Run tests
-          command: python manage.py test stock
+          command: python manage.py test stocks
