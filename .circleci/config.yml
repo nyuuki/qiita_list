@@ -6,20 +6,20 @@ jobs:
       - image: python:3
     environment:
         TZ: /usr/share/zoneinfo/Asia/Tokyo # Time Zoneを指定
-    working_directory: ~/work # コード実行場所 以下のstepsはworking_directoryで実行される
+    # working_directory: ~/work # コード実行場所 以下のstepsはworking_directoryで実行される
     steps:
       - checkout
       - run: mkdir htmlcov # テストコード置き場
       # requirements.txtに変更がなければ、以前作成したPython仮想環境を復元
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "~/work/requirements.txt" }}
+          - v1-dependencies-{{ checksum "requirements.txt" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
       - run:
          name: Install dependencies
-         working_directory: ~/work
+         # working_directory: ~/work
          command: |
             ls -R
             pwd
@@ -32,8 +32,8 @@ jobs:
       # Python仮想環境を保管
       - save_cache:
           paths:
-            - ~/work/venv
-          key: v1-dependencies-{{ checksum "~/work/requirements.txt" }}
+            - ./venv
+          key: v1-dependencies-{{ checksum "requirements.txt" }}
 
       - run:
           name: Run tests
