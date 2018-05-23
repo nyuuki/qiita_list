@@ -19,11 +19,11 @@ jobs:
 
       # requirements.txtに変更がなければ、以前作成したPython仮想環境を復元
       # save_cacheで指定したkeyで保存したファイルをダウンロードできる。
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "requirements.txt" }}
+#      - restore_cache:
+#          keys:
+#          - v1-dependencies-{{ checksum "requirements.txt" }}
           #    # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
+#          - v1-dependencies-
 
       - run:
          name: Install dependencies
@@ -31,7 +31,6 @@ jobs:
             python3 -m venv venv
             source venv/bin/activate
             pip install -r requirements.txt
-            sudo chmod -R 777 ./
       # Python仮想環境を保管
       # pathsで設定した内容をkeyの名前で保存できる。
       - save_cache:
@@ -42,6 +41,7 @@ jobs:
       - run:
           name: Run tests
           command: |
+            sudo chmod -R 777 ./
             source venv/bin/activate
             python manage.py test
 
