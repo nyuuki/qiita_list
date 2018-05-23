@@ -6,6 +6,7 @@ jobs:
 
     steps:
       - checkout
+      - run: mkdir test-reports
 
       # requirements.txtに変更がなければ、以前作成したPython仮想環境を復元
       - restore_cache:

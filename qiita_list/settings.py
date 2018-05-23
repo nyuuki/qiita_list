@@ -141,7 +141,7 @@ TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 TEST_APPS = (
     'stocks',
 )
-REPORT_DIR = (os.path.join(PACKAGE_ROOT, 'test_report'),)
+REPORT_DIR = (os.path.join(PACKAGE_ROOT, 'test-reports'),)
 
 NOSE_ARGS = [
     '-s',
