@@ -11,7 +11,9 @@ jobs:
       - checkout
       - run:
           name: analyze by SonarQube
-          command: bash ./.circleci/analyze-sonarqube.sh
+          command: |
+              ls
+              bash .circleci/analyze-sonarqube.sh
       - run: mkdir htmlcov # テストコード置き場
 
       # requirements.txtに変更がなければ、以前作成したPython仮想環境を復元
