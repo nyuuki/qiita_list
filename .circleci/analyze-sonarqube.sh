@@ -38,6 +38,7 @@ if [ "$CIRCLE_BRANCH" == "master" ]; then
     echo "Analyzing ${CIRCLE_BRANCH} branch to push issues to SonarQube server"
     ls -l $HOME/$SONAR_DIR/bin/
     chmod +x $HOME/$SONAR_DIR/bin/sonar-scanner
+    sed -i s/sh/bash/g $HOME/$SONAR_DIR/bin/sonar-scanner
     $HOME/$SONAR_DIR/bin/sonar-scanner $DEFAULT_SONAR_PARAMS \
     -Dsonar.projectKey=$CIRCLE_PROJECT_USERNAME:$CIRCLE_PROJECT_REPONAME;
 elif [ "$CIRCLE_BRANCH" == "staging" ]; then
