@@ -13,10 +13,10 @@ jobs:
           name: analyze by SonarQube
           command: |
               apt update
-              apt-get install -y software-properties-common -q
-              add-apt-repository ppa:openjdk-r/ppa
+              apt-get install -y software-properties-common -qq
+              add-apt-repository ppa:openjdk-r/ppa -y
               apt update
-              apt install -y unzip openjdk-8-jre openjdk-8-jdk -q
+              apt install -y unzip openjdk-8-jre openjdk-8-jdk -qq
               bash .circleci/analyze-sonarqube.sh
       - run: mkdir htmlcov # テストコード置き場
 
