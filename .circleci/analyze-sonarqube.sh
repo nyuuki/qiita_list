@@ -15,6 +15,7 @@ DEFAULT_SONAR_PARAMS="-Dsonar.projectKey=$CIRCLE_PROJECT_REPONAME \
                         -Dsonar.projectVersion=$CIRCLE_BUILD_NUM \
                         -Dsonar.host.url=https://sonarcloud.io \
                         -Dsonar.sourceEncoding=UTF-8 \
+                        -Dsonar.organization=$SONAR_ORG \
                         -Dsonar.sources=."
 
 if [ -n "$CI_PULL_REQUEST" ]; then
@@ -40,7 +41,9 @@ if [ "$CIRCLE_BRANCH" == "master" ]; then
     chmod +x $HOME/$SONAR_DIR/bin/sonar-scanner
     sed -i s/sh/bash/g $HOME/$SONAR_DIR/bin/sonar-scanner
     $HOME/$SONAR_DIR/bin/sonar-scanner $DEFAULT_SONAR_PARAMS \
-    -Dsonar.projectKey=$CIRCLE_PROJECT_USERNAME:$CIRCLE_PROJECT_REPONAME -X;
+    -Dsonar.projectKey=$SONAR_PJKEY -X;
+    # -Dsonar.projectKey=$CIRCLE_PROJECT_USERNAME:$CIRCLE_PROJECT_REPONAME -X;
+
 elif [ "$CIRCLE_BRANCH" == "staging" ]; then
     echo "Analyzing ${CIRCLE_BRANCH} branch to push issues to SonarQube server"
     $HOME/$SONAR_DIR/bin/sonar-scanner $DEFAULT_SONAR_PARAMS \
