@@ -12,6 +12,7 @@ jobs:
       - run:
           name: analyze by SonarQube
           command: |
+              add-apt-repository ppa:openjdk-r/ppa
               apt update
               apt install -y unzip openjdk-8-jre openjdk-8-jdk
               bash .circleci/analyze-sonarqube.sh
