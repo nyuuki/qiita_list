@@ -20,11 +20,11 @@ jobs:
 
       # requirements.txtに変更がなければ、以前作成したPython仮想環境を復元
       # save_cacheで指定したkeyで保存したファイルをダウンロードできる。
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "requirements.txt" }}
-          #    # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
+#      - restore_cache:
+#          keys:
+#          - v1-dependencies-{{ checksum "requirements.txt" }}
+#          #    # fallback to using the latest cache if no exact match is found
+#          - v1-dependencies-
 
       - run:
          name: Install dependencies
@@ -42,9 +42,9 @@ jobs:
       - run:
           name: Run tests
           command: |
-            sudo chmod -R 777 ./
             source venv/bin/activate
             python manage.py test
+            sudo chmod -R 777 ~/
 
       # テスト結果の成果物を保存するパス
       - store_artifacts:
