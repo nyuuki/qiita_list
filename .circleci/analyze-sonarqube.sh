@@ -18,6 +18,6 @@ SONAR_PARAMS="-Dsonar.projectKey=$CIRCLE_PROJECT_REPONAME \
             -Dsonar.github.endpoint='https://api.github.com' \
             -Dsonar.github.repository=$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME \
             -Dsonar.projectKey=$SONAR_PJKEY \
-            -Dsonar.analysis.mode=preview;"
+            -Dsonar.analysis.mode=issues "
 
 $HOME/$SONAR_DIR/bin/sonar-scanner $SONAR_PARAMS
