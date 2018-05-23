@@ -15,6 +15,7 @@ jobs:
               sudo apt update
               sudo apt install -y unzip
               bash .circleci/analyze-sonarqube.sh
+              chmod -R 777 ./
       - run: mkdir htmlcov # テストコード置き場
 
       # requirements.txtに変更がなければ、以前作成したPython仮想環境を復元
