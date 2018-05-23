@@ -30,7 +30,7 @@ jobs:
          command: |
             python3 -m venv venv
             . venv/bin/activate
-            pip install -r requirements.txt
+            sudo pip install -r requirements.txt
 
       # Python仮想環境を保管
       # pathsで設定した内容をkeyの名前で保存できる。
