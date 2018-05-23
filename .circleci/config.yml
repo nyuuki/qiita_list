@@ -3,7 +3,8 @@ jobs:
   build: # Workflowを試しに使ってみるためにコメントアウト
     # build_and_test: # workflowから呼び出し
     docker: # ベースとなるDocker imageを指定
-      - image: "circleci/openjdk:8-jdk-browsers"
+      # - image: "circleci/openjdk:8-jdk-browsers"
+      - image: "python:3"
     environment:
         TZ: /usr/share/zoneinfo/Asia/Tokyo # Time Zoneを指定
     #working_directory: デフォルトが`~/project/`
@@ -12,8 +13,9 @@ jobs:
       - run:
           name: analyze by SonarQube
           command: |
-              sudo apt update
-              sudo apt install -y unzip python3-dev python3-pip python3-venv
+              # sudo apt update
+              # sudo apt install -y unzip
+              # sudo apt install -y unzip python3-dev python3-pip python3-venv
               # bash .circleci/analyze-sonarqube.sh
               ls -lR
       - run: mkdir htmlcov # テストコード置き場
