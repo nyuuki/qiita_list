@@ -13,14 +13,13 @@ jobs:
       - run:
           name: analyze by SonarQube
           command: |
-              echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee /etc/apt/sources.list.d/webupd8team-java.list
-              echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee -a /etc/apt/sources.list.d/webupd8team-java.list
-              echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true" | /usr/bin/debconf-set-selections
+              echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" > /etc/apt/sources.list.d/webupd8team-java.list
+              echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" >> /etc/apt/sources.list.d/webupd8team-java.list
+              echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true" >> /usr/bin/debconf-set-selections
               apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886
               apt-get update
               apt-get install unzip oracle-java8-installer -y -qq
               bash .circleci/analyze-sonarqube.sh
-      - run: mkdir htmlcov # テストコード置き場
 
       # requirements.txtに変更がなければ、以前作成したPython仮想環境を復元
       # save_cacheで指定したkeyで保存したファイルをダウンロードできる。
@@ -40,9 +39,10 @@ jobs:
       # pathsで設定した内容をkeyの名前で保存できる。
       - save_cache:
           paths:
-            - ./venv
+            - venv
           key: v1-dependencies-{{ checksum "requirements.txt" }}
 
+      - run: mkdir htmlcov # テスト結果置き場
       - run:
           name: Run tests
           command: |
