@@ -1,6 +1,8 @@
-from django.conf.urls import include, url
+from django.urls import include, path, re_path
 from stocks.urls import urlpatterns as qiitalist_url
+from django.contrib import admin
 
 urlpatterns = [
-    url(r'^qiita/', include(qiitalist_url)),
+    re_path('^qiita/', include(qiitalist_url)),
+    path('admin/', admin.site.urls),
 ]

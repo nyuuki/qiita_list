@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+
+<body>
+<h3>サンプル</h3>
+<div id="example_plotly"></div>
+</body>
+<script type="text/javascript">
+    var graphs = {{graph_json | safe}};
+    Plotly.plot("example_plotly",
+        graphs.data,
+        graphs.layout || {});
+</script>
+</html>
