@@ -1,60 +1,60 @@
 version: 2
 jobs:
   build_and_test: # workflowから呼び出し
-      # build: # Workflowを試しに使ってみるためにコメントアウト
+    # build: # Workflowを試しに使ってみるためにコメントアウト
     docker: # ベースとなるDocker imageを指定
-      # - image: "circleci/openjdk:8-jdk-browsers"
-      - image: "python:3"
+    # - image: "circleci/openjdk:8-jdk-browsers"
+    - image: "python:3"
     environment:
-        TZ: /usr/share/zoneinfo/Asia/Tokyo # Time Zoneを指定
+      TZ: /usr/share/zoneinfo/Asia/Tokyo # Time Zoneを指定
     #working_directory: デフォルトが`~/project/`
     steps:
-      - checkout
-      - run:
-          name: analyze by SonarQube
-          command: |
-              echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" > /etc/apt/sources.list.d/webupd8team-java.list
-              echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" >> /etc/apt/sources.list.d/webupd8team-java.list
-              echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true" | /usr/bin/debconf-set-selections
-              apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886
-              apt-get update
-              apt-get install unzip oracle-java8-installer -y -qq
-              bash .circleci/analyze-sonarqube.sh
+    - checkout
+    - run:
+        name: analyze by SonarQube
+        command: |
+          echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" > /etc/apt/sources.list.d/webupd8team-java.list
+          echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" >> /etc/apt/sources.list.d/webupd8team-java.list
+          echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true" | /usr/bin/debconf-set-selections
+          apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886
+          apt-get update
+          apt-get install unzip oracle-java8-installer -y -qq
+    # bash .circleci/analyze-sonarqube.sh
 
-      # requirements.txtに変更がなければ、以前作成したPython仮想環境を復元
-      # save_cacheで指定したkeyで保存したファイルをダウンロードできる。
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "requirements.txt" }}
-#          #    # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
+    # requirements.txtに変更がなければ、以前作成したPython仮想環境を復元
+    # save_cacheで指定したkeyで保存したファイルをダウンロードできる。
+    - restore_cache:
+        keys:
+        - v1-dependencies-{{ checksum "requirements.txt" }}
+        #          #    # fallback to using the latest cache if no exact match is found
+        - v1-dependencies-
 
-      - run:
-         name: Install dependencies
-         command: |
-            python3 -m venv venv
-            source venv/bin/activate
-            pip install -r requirements.txt
-      # Python仮想環境を保管
-      # pathsで設定した内容をkeyの名前で保存できる。
-      - save_cache:
-          paths:
-            - venv
-          key: v1-dependencies-{{ checksum "requirements.txt" }}
+    - run:
+        name: Install dependencies
+        command: |
+          python3 -m venv venv
+          source venv/bin/activate
+          pip install -r requirements.txt
+    # Python仮想環境を保管
+    # pathsで設定した内容をkeyの名前で保存できる。
+    - save_cache:
+        paths:
+        - venv
+        key: v1-dependencies-{{ checksum "requirements.txt" }}
 
-      - run: mkdir htmlcov # テスト結果置き場
-      - run:
-          name: Run tests
-          command: |
-            source venv/bin/activate
-            python manage.py test
+    - run: mkdir htmlcov # テスト結果置き場
+    - run:
+        name: Run tests
+        command: |
+          source venv/bin/activate
+          python manage.py test
 
-      # テスト結果の成果物を保存するパス
-      - store_artifacts:
-          path: htmlcov/
+    # テスト結果の成果物を保存するパス
+    - store_artifacts:
+        path: htmlcov/
 
 workflows: # 試しに入れてみた。
   version: 2
   build_and_test: # workflow名
     jobs:
-      - build_and_test
+    - build_and_test
